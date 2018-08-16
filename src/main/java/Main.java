@@ -28,11 +28,13 @@ public class Main {
     }
 
     public double functionValue(double x) {
-        return x <= 0.9 + EPS
-                ?
-                (Math.pow(Math.log(x), 3) + x * x) / Math.sqrt(x + t)
-                :
-                Math.cos(x) + t * Math.pow(Math.sin(x), 2);
+        if (x < 0.9 + EPS) {
+            double log = Math.log(x);
+            return log*log*log/Math.sqrt(x + t);        
+        } else {
+            double sin = Math.sin(x);
+            return Math.cos(x) + t * sin*sin;
+        }
     }
 
     public int getStepAmount(double start, double finish, double step) {
